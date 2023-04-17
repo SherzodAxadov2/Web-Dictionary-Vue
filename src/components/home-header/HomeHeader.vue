@@ -11,6 +11,12 @@ const headerSelectors = ref([
   { id: 3, title: "Mono" },
 ]);
 
+document.addEventListener("click", (event) => {
+  if (!document.querySelector(".header__select").contains(event.target)) {
+    isSelectorActive.value = false;
+  }
+});
+
 const showSelect = function () {
   isSelectorActive.value = !isSelectorActive.value;
 };
@@ -50,12 +56,29 @@ const setSelectorValue = (e) => {
   setFontFamily(e.target.textContent);
 };
 
+// Save dark mode
+const saveThemeStorage = () => {
+  if (document.body.getAttribute("data-theme")) {
+    localStorage.setItem("theme", document.body.getAttribute("data-theme"));
+  } else {
+    localStorage.removeItem("theme");
+  }
+};
+
 const darkMode = () => {
   darkModeToggle.value = !darkModeToggle.value;
   document.body.getAttribute("data-theme")
     ? document.body.removeAttribute("data-theme")
     : document.body.setAttribute("data-theme", "dark");
+  saveThemeStorage();
 };
+
+if (localStorage.getItem("theme")) {
+  document.body.setAttribute("data-theme", localStorage.getItem("theme"));
+  darkModeToggle.value = true;
+} else {
+  darkModeToggle.value = false;
+}
 </script>
 <template>
   <header class="header">

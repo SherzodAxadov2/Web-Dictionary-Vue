@@ -10,6 +10,10 @@ const nodata = ref(false);
 const error = ref(false);
 const showWord = ref(false);
 
+const saveLocalStorage = (word) => {
+  localStorage.setItem("word", word);
+};
+
 async function getDefinition(word) {
   loader.value = true;
   if (word) {
@@ -27,6 +31,7 @@ async function getDefinition(word) {
         loader.value = false;
       } else {
         if (data[0]) {
+          saveLocalStorage(data[0].word);
           nodata.value = false;
           definitionArray.value.push(data[0]);
           loader.value = false;
@@ -43,6 +48,10 @@ async function getDefinition(word) {
     loader.value = false;
     nodata.value = false;
   }
+}
+
+if (localStorage.getItem("word")) {
+  getDefinition(localStorage.getItem("word"));
 }
 </script>
 
