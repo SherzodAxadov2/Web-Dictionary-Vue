@@ -51,6 +51,11 @@ body[data-theme="dark"] {
             border: 1px solid var(--black-1f);
             background: var(--black-1f);
         }
+        &.error {
+            input {
+                border: 1px solid var(--red) !important;
+            }
+        }
     }
 }
 .dictionary {

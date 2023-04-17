@@ -1,18 +1,61 @@
 <script setup>
 import { ref } from "vue";
-import HeaderSelectors from "../home-header/HeaderSelectors.vue";
 
 let isSelectorActive = ref(false);
+const selected = ref("Sans Serif");
+const darkModeToggle = ref(false);
+
 const headerSelectors = ref([
   { id: 1, title: "Sans Serif" },
   { id: 2, title: "Serif" },
   { id: 3, title: "Mono" },
 ]);
 
-// const showSelect = function () {
-//   isSelectorActive = ref(!isSelectorActive._value);
-//   console.log(isSelectorActive);
-// };
+const showSelect = function () {
+  isSelectorActive.value = !isSelectorActive.value;
+};
+
+const saveFontToStorage = (font) => {
+  localStorage.setItem("font-family", font);
+};
+
+const setFontFamily = (fontFamily) => {
+  switch (fontFamily) {
+    case "Sans Serif":
+      document.body.classList = "font--sans-serif";
+      break;
+
+    case "Serif":
+      document.body.classList = "font--serif";
+      break;
+
+    case "Mono":
+      document.body.classList = "font--mono";
+      break;
+
+    default:
+      document.body.classList = "font--sans-serif";
+      break;
+  }
+};
+
+if (localStorage.getItem("font-family")) {
+  setFontFamily(localStorage.getItem("font-family"));
+  selected.value = localStorage.getItem("font-family");
+}
+
+const setSelectorValue = (e) => {
+  selected.value = e.target.textContent;
+  saveFontToStorage(e.target.textContent);
+  setFontFamily(e.target.textContent);
+};
+
+const darkMode = () => {
+  darkModeToggle.value = !darkModeToggle.value;
+  document.body.getAttribute("data-theme")
+    ? document.body.removeAttribute("data-theme")
+    : document.body.setAttribute("data-theme", "dark");
+};
 </script>
 <template>
   <header class="header">
@@ -25,23 +68,31 @@ const headerSelectors = ref([
         </div>
 
         <div class="header__widgets">
-          <div class="header__select" @click="!isSelectorActive._value">
-            <p class="header__select--selected body-m text-black-2d">Sans Serif</p>
+          <div class="header__select" @click="showSelect">
+            <p class="header__select--selected body-m text-black-2d">{{ selected }}</p>
             <img src="@/assets/icons/select-icon.png" alt="icon" />
-            <div class="header__selectors" v-show="isSelectorActive._value">
+            <div class="header__selectors" v-if="isSelectorActive">
               <ul>
-                <HeaderSelectors
+                <li
                   v-for="{ title, id } in headerSelectors"
                   :key="id"
-                  :selector="title"
-                />
+                  @click="($event) => setSelectorValue($event)"
+                >
+                  <p class="body-m text-black-2d">{{ title }}</p>
+                </li>
               </ul>
             </div>
           </div>
           <span></span>
           <div class="header__toggle">
-            <div class="header__toggle__btn" onclick="darkMode()"><span></span></div>
-            <i class="fa-solid fa-moon" onclick="darkMode()"></i>
+            <div
+              class="header__toggle__btn"
+              :class="darkModeToggle ? 'dark' : ''"
+              @click="darkMode"
+            >
+              <span></span>
+            </div>
+            <i class="fa-solid fa-moon" @click="darkMode"></i>
           </div>
         </div>
       </div>

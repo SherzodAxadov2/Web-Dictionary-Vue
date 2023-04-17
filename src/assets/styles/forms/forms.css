@@ -48,6 +48,9 @@ body[data-theme=dark] .form__input {
   border: 1px solid var(--black-1f);
   background: var(--black-1f);
 }
+body[data-theme=dark] .form.error input {
+  border: 1px solid var(--red) !important;
+}
 
 .dictionary__audio {
   width: 75px;

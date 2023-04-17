@@ -4,7 +4,6 @@ import DictionaryMeanings from "./DictionaryMeanings.vue";
 import DictionarySource from "./DictionarySource.vue";
 
 const data = defineProps(["word"]);
-console.log(data.word);
 </script>
 
 <template>

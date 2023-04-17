@@ -1,6 +1,5 @@
 <script setup>
 const meanings = defineProps(["meaning"]);
-console.log(meanings.meaning);
 </script>
 
 <template>
