@@ -27,8 +27,8 @@ async function getDefinition(word) {
   <HomeHeader />
   <FormSearch @submit-word="getDefinition" />
 
-  <div v-show="definitionArray.length > 0">
-      <DictionaryWrapper :word="definitionArray[0]" />
+  <div v-if="definitionArray.length > 0">
+    <DictionaryWrapper :word="definitionArray[0]" />
   </div>
 
   <!-- <div class="loader">

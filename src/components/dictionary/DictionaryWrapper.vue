@@ -17,7 +17,7 @@ console.log(data.word);
         :meaning="meaning"
       />
 
-      <DictionarySource />
+      <DictionarySource :source="data.word.sourceUrls" />
     </div>
   </div>
 </template>

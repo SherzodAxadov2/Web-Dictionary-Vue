@@ -28,9 +28,17 @@ console.log(meanings.meaning);
     <div class="dictionary__synonym">
       <p class="heading-s text-gray-bold">Synonyms</p>
       <p class="heading-s text-purple bold">
-        <a href="https://en.wiktionary.org/wiki/" target="_blank">{{
-          meanings.meaning.synonyms[0] ? meanings.meaning.synonyms[0] : "not found"
-        }}</a>
+        <a
+          :href="
+            meanings.meaning.synonyms[0]
+              ? `https://en.wiktionary.org/wiki/` + meanings.meaning.synonyms[0]
+              : 'https://en.wiktionary.org/wiki/'
+          "
+          target="_blank"
+          >{{
+            meanings.meaning.synonyms[0] ? meanings.meaning.synonyms[0] : "not found"
+          }}</a
+        >
       </p>
     </div>
   </div>
