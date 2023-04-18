@@ -24,8 +24,9 @@ function audioPlay() {
       <p class="dictionary__spelling heading-m text-purple"></p>
     </div>
 
-    <button class="dictionary__audio" @click="audioPlay">
+    <button class="audio" @click="audioPlay">
       <i class="fa-sharp fa-solid fa-play"></i>
+      <i class="fa-solid fa-pause"></i>
     </button>
   </div>
 </template>

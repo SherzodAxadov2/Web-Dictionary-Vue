@@ -240,8 +240,11 @@ body[data-theme=dark] .form__input {
   border: 1px solid var(--black-1f);
   background: var(--black-1f);
 }
+body[data-theme=dark] .form.error input {
+  border: 1px solid var(--red) !important;
+}
 
-.dictionary__audio {
+.audio {
   width: 75px;
   height: 75px;
   border-radius: 50%;
@@ -252,17 +255,31 @@ body[data-theme=dark] .form__input {
   transition: var(--transition);
   cursor: pointer;
 }
-.dictionary__audio:hover {
+.audio:hover {
   background: var(--purple);
 }
-.dictionary__audio:hover i {
+.audio:hover i {
   color: var(--white);
 }
-.dictionary__audio i {
+.audio:hover i.fa-play {
+  display: none;
+}
+.audio:hover i.fa-pause {
+  display: block;
+}
+.audio i {
   font-size: 21px;
   color: var(--purple);
   transition: var(--transition);
   margin-left: 4px;
+}
+.audio i.fa-play {
+  display: block;
+}
+.audio i.fa-pause {
+  font-size: 23px;
+  margin-left: 0;
+  display: none;
 }
 
 @media (max-width: 576px) {
@@ -274,13 +291,16 @@ body[data-theme=dark] .form__input {
   .form__search {
     top: 16px;
   }
-  .dictionary__audio {
+  .audio {
     width: 48px;
     height: 48px;
   }
-  .dictionary__audio i {
+  .audio i {
     font-size: 13px;
     margin-left: 2px;
+  }
+  .audio i.fa-pause {
+    font-size: 16px;
   }
 }
 body {
